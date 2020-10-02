@@ -45,6 +45,14 @@ class DoublyLinkedListNode {
 	public function __toString() {
 		return $this->value();
 	}
+	
+	public function __debugInfo() {
+		return [
+			'value' => $this->value(),
+			'previous value' => $this->previous() ? $this->previous()->value() : null,
+			'next value' => $this->next() ? $this->next()->value() : null,
+		];
+	}
 }
 
 class DoublyLinkedList {
@@ -113,13 +121,13 @@ class DoublyLinkedList {
 		if ($this->first) {
 			$item = $this->first;
 			while($item) {
-				$items[] = ['Current: ' . $item->value(), 'Previous: ' . ($item->previous() ? $item->previous()->value() : null), 'Next: ' . ($item->next() ? $item->next()->value() : null)];
+				$items[] = $item;
 				$item = $item->next();
 			}
 		}
 		return [
-			'first' => $this->first->value(),
-			'last' => $this->last->value(),
+			'first' => $this->first(),
+			'last' => $this->last(),
 			'items' => $items,
 		];
 	}
